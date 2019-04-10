@@ -24,12 +24,21 @@ type SessionOptions struct {
 }
 
 func DefaultSession() *vaulted.Session {
-	return &vaulted.Session{
+	sess := &vaulted.Session{
 		SessionVersion: vaulted.SessionVersion,
 
 		Name:       os.Getenv("VAULTED_ENV"),
 		Expiration: time.Now().Add(time.Hour).Truncate(time.Second),
 	}
+
+	region := os.Getenv("AWS_DEFAULT_REGION")
+	if region != "" {
+		sess.AWSCreds = &vaulted.AWSCredentials{
+			Region: &region,
+		}
+	}
+
+	return sess
 }
 
 func GetSessionWithOptions(store vaulted.Store, options *SessionOptions) (*vaulted.Session, error) {

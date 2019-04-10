@@ -252,6 +252,10 @@ func (s *Session) Variables() *Variables {
 				"AWS_SECURITY_TOKEN",
 			)
 		}
+
+		if s.AWSCreds.Region != nil {
+			vars.Set["AWS_DEFAULT_REGION"] = *s.AWSCreds.Region
+		}
 	}
 
 	return &vars
