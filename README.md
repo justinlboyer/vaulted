@@ -89,6 +89,11 @@ vault's secrets. In this case, you can spawn an interactive shell:
 vaulted shell my-vault
 ```
 
+Othertimes its useful to refresh the session
+```
+vaulted shell --refresh <vaultname>
+```
+
 _**Warning!** Leaving interactive shells with your credentials loaded can be
 dangerous as you may inadvertently provide credentials to an application you
 didn't intend!_
